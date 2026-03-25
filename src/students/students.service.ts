@@ -79,4 +79,14 @@ export class StudentsService {
 
         return updatedStudent;
     }
+
+    async getCourses(studentId: string) {
+        const student = await this.studentModel
+            .findById(studentId)
+            .populate('enrolledCourses');
+
+        if (!student) throw new NotFoundException('Student not found');
+
+        return student.enrolledCourses;
+    }
 }

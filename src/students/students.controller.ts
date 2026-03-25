@@ -62,4 +62,10 @@ export class StudentsController {
     ) {
         return this.studentsService.enroll(id, courseIds);
     }
+
+    @Get(':id/courses')
+    @Roles('admin', 'agent', 'user')
+    getCourses(@Param('id') id: string) {
+        return this.studentsService.getCourses(id);
+    }
 }
