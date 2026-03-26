@@ -12,7 +12,11 @@ import { CoursesService } from './courses.service';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from 'src/common/guards/roles/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { CreateCourseDto } from './dto/create-course.dto';
 
+@ApiTags('Courses')
+@ApiBearerAuth()
 @Controller('courses')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class CoursesController {
@@ -21,7 +25,7 @@ export class CoursesController {
     // ✅ Create
     @Post()
     @Roles('admin', 'agent')
-    create(@Body() dto: any) {
+    create(@Body() dto: CreateCourseDto) {
         return this.coursesService.create(dto);
     }
 
@@ -35,7 +39,7 @@ export class CoursesController {
     // ✅ Update
     @Put(':id')
     @Roles('admin', 'agent')
-    update(@Param('id') id: string, @Body() dto: any) {
+    update(@Param('id') id: string, @Body() dto: CreateCourseDto) {
         return this.coursesService.update(id, dto);
     }
 

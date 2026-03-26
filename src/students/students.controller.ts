@@ -12,7 +12,12 @@ import { StudentsService } from './students.service';
 import { JwtAuthGuard } from 'src/common/guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from 'src/common/guards/roles/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { CreateStudentDto } from './dto/create-student.dto';
+import { EnrollDto } from './dto/enroll.dto';
 
+@ApiTags('Students')
+@ApiBearerAuth()
 @Controller('students')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class StudentsController {
@@ -21,7 +26,7 @@ export class StudentsController {
     // ✅ Create
     @Post()
     @Roles('admin', 'agent')
-    create(@Body() dto: any) {
+    create(@Body() dto: CreateStudentDto) {
         return this.studentsService.create(dto);
     }
 
@@ -42,7 +47,7 @@ export class StudentsController {
     // ✅ Update
     @Put(':id')
     @Roles('admin', 'agent')
-    update(@Param('id') id: string, @Body() dto: any) {
+    update(@Param('id') id: string, @Body() dto: CreateStudentDto) {
         return this.studentsService.update(id, dto);
     }
 
@@ -58,9 +63,9 @@ export class StudentsController {
     @Roles('admin', 'agent')
     enroll(
         @Param('id') id: string,
-        @Body('courseIds') courseIds: string[],
+        @Body() dto: EnrollDto,
     ) {
-        return this.studentsService.enroll(id, courseIds);
+        return this.studentsService.enroll(id, dto.courseIds);
     }
 
     @Get(':id/courses')
