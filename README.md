@@ -236,34 +236,20 @@ src/
 
 ---
 
-## 🧪 Testing
 
-Use:
+## 📘 API Documentation (Swagger)
 
-* Postman
-* Thunder Client
-* Swagger (if implemented)
+The API is documented using Swagger.
 
----
+👉 [Open Swagger UI](http://119.18.62.146:9090/api-docs)
 
-## 📤 Submission
-
-* GitHub Repository
-* README.md (this file)
-* Postman Collection / Swagger Docs
-* (Optional) Deployed API link
+Features:
+- Interactive API testing
+- JWT Authorization support
+- Request/Response schema visualization
 
 ---
 
-## 🚀 Future Improvements
-
-* Swagger API Documentation
-* Pagination
-* Refresh Tokens
-* Global Exception Handling
-* Docker Deployment
-
----
 
 ## 👨‍💻 Author
 
